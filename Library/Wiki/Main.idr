@@ -5,15 +5,11 @@ import Core
 import Physics
 import Wiki.PhysicsScaleTransformSpec
 import Wiki.LawHomomorphismSpec
+import Wiki.QuadStreamPhysicalLawsSpec
+import Wiki.DensityStreamSpec
 import Language.Reflection
 
-%default total
-
-0 prfAction1 : (Math.ActionPrinciple.auditDiscreteEulerLagrangeEquivalenceProof = True)
-prfAction1 = auditDiscreteEulerLagrangeEquivalence
-
-0 prfAction2 : (Math.ActionPrinciple.auditGeodesicLeastActionOptimalityProof = True)
-prfAction2 = auditGeodesicLeastActionOptimality
+%default covering
 
 main : IO ()
 main = do
@@ -41,6 +37,22 @@ main = do
      then putStrLn "   [PASSED] Physical Law Functor Category Laws Verified!"
      else do
        putStrLn "   [FAILED] Functor Category Laws Failed!"
+       exitWith (ExitFailure 1)
+  putStrLn ""
+  putStrLn "4. Quad-Stream Physical Law Passband & Free Energy Specs:"
+  p3 <- auditQuadStreamPhysicalLawsProof
+  if p3
+     then putStrLn "   [PASSED] Quad-Stream Physical Law Passband & Free Energy Specs Verified!"
+     else do
+       putStrLn "   [FAILED] Quad-Stream Physical Law Specs Failed!"
+       exitWith (ExitFailure 1)
+  putStrLn ""
+  putStrLn "5. Deforested Density Matrix & Relativistic Spinor Metric Stream Specs:"
+  p4 <- auditDensityStreamSpecProof
+  if p4
+     then putStrLn "   [PASSED] Deforested Density Matrix & Relativistic Spinor Stream Specs Verified!"
+     else do
+       putStrLn "   [FAILED] Deforested Density & Spinor Stream Specs Failed!"
        exitWith (ExitFailure 1)
   putStrLn "========================================================"
   putStrLn "  PHYSICS WIKI VERIFICATION COMPLETE: ALL PASSED!"

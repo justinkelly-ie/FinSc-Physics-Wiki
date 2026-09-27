@@ -7,9 +7,11 @@ depends = FinSc-Geometry, FinSc-Multiset-Core, FinSc-Multiset-Transform, FinSc-P
 sourcedir = "Library"
 
 modules = Wiki.Generators,
+          Wiki.DensityStreamSpec,
           Wiki.LawHomomorphismSpec,
           Wiki.Main,
-          Wiki.PhysicsScaleTransformSpec
+          Wiki.PhysicsScaleTransformSpec,
+          Wiki.QuadStreamPhysicalLawsSpec
 
 main = Wiki.Main
 executable = physics-wiki

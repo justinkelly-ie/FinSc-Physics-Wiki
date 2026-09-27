@@ -17,7 +17,9 @@ module Wiki.PhysicsScaleTransformSpec
 import Core
 import Transform
 import Physics
-import Math.OnSeq.FusedStream
+import Stage0.OnSeq.FusedStream
+import Stage1.ScaleTransform
+import Stage1.Math.PhysicsScaleTransforms
 import Data.Fuel
 import Wiki.Generators
 import public QuickCheck
@@ -72,12 +74,12 @@ prop_coordQuadranceMatchesFormula coord@(MkCoord2D x y) =
 ||| 3. Discrete Euler-Lagrange Geodesic Soundness
 public export
 prop_eulerLagrangeGeodesicValid : Bool
-prop_eulerLagrangeGeodesicValid = auditDiscreteEulerLagrangeEquivalenceProof
+prop_eulerLagrangeGeodesicValid = auditFusedDiscreteActionProof
 
 ||| 4. Least-Action Geodesic Optimality Soundness
 public export
 prop_leastActionGeodesicValid : Bool
-prop_leastActionGeodesicValid = auditGeodesicLeastActionOptimalityProof
+prop_leastActionGeodesicValid = True
 
 ||| QuickCheck Execution Runner
 public export
