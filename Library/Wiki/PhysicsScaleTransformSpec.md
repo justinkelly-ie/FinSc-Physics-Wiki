@@ -58,14 +58,14 @@ fusedParticleTrajectoryStream f items =
 
 ||| 1. Non-Negative Metric Quadrance: Q(x, y) >= 0
 public export
-prop_coordQuadranceNonNegative : Coord2D -> Bool
+prop_coordQuadranceNonNegative : LatticeCoord2D -> Bool
 prop_coordQuadranceNonNegative c =
   let q : BoxInt = scaleTransform c
   in unwrapBox q >= 0
 
 ||| 2. Metric Quadrance Homomorphism Formula: Q(x, y) == x^2 + y^2
 public export
-prop_coordQuadranceMatchesFormula : Coord2D -> Bool
+prop_coordQuadranceMatchesFormula : LatticeCoord2D -> Bool
 prop_coordQuadranceMatchesFormula coord@(MkCoord2D x y) =
   let q : BoxInt = scaleTransform coord
       expected = (x * x) + (y * y)

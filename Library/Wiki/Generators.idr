@@ -7,11 +7,11 @@ import Physics
 %default total
 
 public export
-Show Coord2D where
+Show LatticeCoord2D where
   show (MkCoord2D x y) = "(" ++ show (unwrapBox x) ++ ", " ++ show (unwrapBox y) ++ ")"
 
 public export
-Arbitrary Coord2D where
+Arbitrary LatticeCoord2D where
   arbitrary = do
     x <- arbitrary {a = Integer}
     y <- arbitrary {a = Integer}
@@ -21,17 +21,11 @@ Arbitrary Coord2D where
     coarbitrary (unwrapBox x) (coarbitrary (unwrapBox y) gen)
 
 public export
-natToGeometry : Nat -> FundamentalGeometry
-natToGeometry Z = EllipticGeom
-natToGeometry (S Z) = HyperbolicGeom
-natToGeometry (S (S Z)) = ParabolicGeom
-natToGeometry (S (S (S _))) = SubstrateGeom
-
-public export
 Arbitrary FundamentalGeometry where
-  arbitrary = map natToGeometry arbitrary
+  arbitrary = elements [EllipticGeom, HyperbolicGeom, ParabolicGeom, SubstrateGeom]
 
   coarbitrary EllipticGeom gen   = coarbitrary (the Nat 0) gen
   coarbitrary HyperbolicGeom gen = coarbitrary (the Nat 1) gen
   coarbitrary ParabolicGeom gen  = coarbitrary (the Nat 2) gen
   coarbitrary SubstrateGeom gen  = coarbitrary (the Nat 3) gen
+

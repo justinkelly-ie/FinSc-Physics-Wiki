@@ -32,10 +32,10 @@ import Stage1.QuadStream
 import Stage1.Goh
 import Stage1.Math.Transform.MultisetFilter
 import Stage1.Math.Transform.ChromogeometryMetric
-import Stage1.Math.Transform.QuadStreamAdjunction
+import Stage1.Math.Transform.QuadStreamDuality
 import Stage1.Math.HelmholtzFreeEnergy
 import Stage1.Math.QuadStreamPhysicalLaws
-import Stage1.FourGeometriesActions
+import Stage1.FourGeometries
 import Wiki.Generators
 import Data.Vect
 
@@ -68,10 +68,10 @@ public export
 prop_helmholtzQuadStreamEnergyConservationGen : Integer -> Bool
 prop_helmholtzQuadStreamEnergyConservationGen tempRaw =
   let temp = intToBoxInt tempRaw
-      e = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometriesActions.ellipticLatticeCapacity) ZeroM
-      h = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometriesActions.hyperbolicRomCapacity) ZeroM
+      e = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometries.ellipticLatticeCapacity) ZeroM
+      h = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometries.hyperbolicRomCapacity) ZeroM
       p = AddM (intToBoxInt 0) (intToBoxInt 0) ZeroM
-      s = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometriesActions.darkMatterTriangularResidue) ZeroM
+      s = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometries.darkMatterTriangularResidue) ZeroM
       qs = MkQuadStream e h p s
       fe = evalQuadStreamHelmholtzFreeEnergy temp qs
       part = quadStreamToCosmicPartition qs
@@ -98,13 +98,13 @@ prop_tripleQuadPhysicalMetricInvarianceGen valRaw =
 public export
 prop_physicalQuadStreamStaticBudgetClosure : Bool
 prop_physicalQuadStreamStaticBudgetClosure =
-  let e = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometriesActions.ellipticLatticeCapacity) ZeroM
-      h = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometriesActions.hyperbolicRomCapacity) ZeroM
+  let e = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometries.ellipticLatticeCapacity) ZeroM
+      h = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometries.hyperbolicRomCapacity) ZeroM
       p = AddM (intToBoxInt 0) (intToBoxInt 0) ZeroM
-      s = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometriesActions.darkMatterTriangularResidue) ZeroM
+      s = AddM (intToBoxInt 0) (natToBoxInt Stage1.FourGeometries.darkMatterTriangularResidue) ZeroM
       qs = MkQuadStream e h p s
       part = quadStreamToCosmicPartition qs
-  in (vmTokens part + deTokens part + dmTokens part) == natToBoxInt Stage1.FourGeometriesActions.primorial210Budget
+  in (vmTokens part + deTokens part + dmTokens part) == natToBoxInt Stage1.FourGeometries.primorial210Budget
 
 ||| Property 5 (Generative QuickCheck): Sector Optics & View Lens Invariance
 public export
