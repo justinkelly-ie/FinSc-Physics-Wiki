@@ -15,8 +15,8 @@ Physical trajectories satisfy action principle stationary point homomorphisms:
 module Wiki.PhysicsScaleTransformSpec
 
 import Core
-import Transform
-import Physics
+import PhaseUnfolding
+import ActionDynamics
 import Stage0.OnSeq.FusedStream
 import Stage1.ScaleTransform
 import Stage1.Math.PhysicsScaleTransforms

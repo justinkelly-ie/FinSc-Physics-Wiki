@@ -2,7 +2,7 @@ module Wiki.Generators
 
 import public QuickCheck
 import Core
-import Physics
+import ActionDynamics
 
 %default total
 

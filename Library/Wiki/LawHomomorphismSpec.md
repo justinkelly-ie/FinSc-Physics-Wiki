@@ -35,8 +35,8 @@ import Core
 import Stage1.Order.Preorder
 import Stage0.OnSeq.FusedStream
 import Data.Fuel
-import Transform
-import Physics
+import PhaseUnfolding
+import ActionDynamics
 import Wiki.Generators
 import public QuickCheck
 import Language.Reflection

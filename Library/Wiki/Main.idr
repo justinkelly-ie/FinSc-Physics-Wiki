@@ -2,7 +2,7 @@ module Wiki.Main
 
 import System
 import Core
-import Physics
+import ActionDynamics
 import Wiki.PhysicsScaleTransformSpec
 import Wiki.LawHomomorphismSpec
 import Wiki.QuadStreamPhysicalLawsSpec
