@@ -7,15 +7,31 @@ import Wiki.PhysicsScaleTransformSpec
 import Wiki.LawHomomorphismSpec
 import Wiki.QuadStreamPhysicalLawsSpec
 import Wiki.DensityStreamSpec
+import Reflect.ActionAuditor
 import Language.Reflection
 
 %default covering
+
+||| Compile-time macro invariant witnesses (Rule 01)
+0 prfAuditGeodesicLeastAction : Reflect.ActionAuditor.auditGeodesicLeastActionProof = True
+prfAuditGeodesicLeastAction = auditGeodesicLeastAction
+
+0 prfAuditNoetherConservation : Reflect.ActionAuditor.auditNoetherConservationProof = True
+prfAuditNoetherConservation = auditNoetherConservation
+
+0 prfAuditCausalActionAsymmetry : Reflect.ActionAuditor.auditCausalActionAsymmetryProof = True
+prfAuditCausalActionAsymmetry = auditCausalActionAsymmetry
 
 main : IO ()
 main = do
   putStrLn "========================================================"
   putStrLn "  IDRIS 2 PHYSICS WIKI VERIFICATION SUITE"
   putStrLn "========================================================"
+  putStrLn "0. Compile-Time Elaborator Reflection Audits (Rule 01):"
+  putStrLn "   - Geodesic Least Action Optimality: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Noether Momentum Conservation: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Causal Action Arrow Asymmetry: INJECTED & VALID (Refl) ✅"
+  putStrLn ""
   putStrLn "1. Discrete Action & Euler-Lagrange Geodesic Proof Audits:"
   if prop_eulerLagrangeGeodesicValid && prop_leastActionGeodesicValid
      then putStrLn "   [PASSED] Static Action & Geodesic Audits Clean!"
