@@ -41,6 +41,12 @@ prfAuditBornRuleRationalNormalization = auditBornRuleRationalNormalization
 0 prfAuditSymplecticFreeParticle : Reflect.ActionAuditor.auditSymplecticFreeParticleProofExport = True
 prfAuditSymplecticFreeParticle = auditSymplecticFreeParticle
 
+0 prfAuditDeforestedQuadStreamPipeline : Reflect.ActionAuditor.auditDeforestedQuadStreamPipelineProofExport = True
+prfAuditDeforestedQuadStreamPipeline = auditDeforestedQuadStreamPipeline
+
+0 prfAuditCompositeCosmicBaryonConservation : Reflect.ActionAuditor.auditCompositeCosmicBaryonConservationProofExport = True
+prfAuditCompositeCosmicBaryonConservation = auditCompositeCosmicBaryonConservation
+
 main : IO ()
 main = do
   putStrLn "========================================================"
@@ -56,6 +62,8 @@ main = do
   putStrLn "   - Spinor Probability Density Positivity: INJECTED & VALID (Refl) ✅"
   putStrLn "   - Born Rule Rational Normalization: INJECTED & VALID (Refl) ✅"
   putStrLn "   - Discrete Symplectic Leapfrog Linear State Transduction: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Deforested Quad-Stream Pipeline Primorial 210 Budget: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Multi-Epoch Cosmic Baryon Evolution & Conservation: INJECTED & VALID (Refl) ✅"
 
   putStrLn ""
   putStrLn "1. Discrete Action & Euler-Lagrange Geodesic Proof Audits:"
