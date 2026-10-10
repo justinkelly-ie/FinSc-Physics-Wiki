@@ -37,6 +37,9 @@ prfAuditSpinorDensityPositivity = auditSpinorDensityPositivity
 0 prfAuditBornRuleRationalNormalization : Reflect.ActionAuditor.auditBornRuleRationalNormalizationProofExport = True
 prfAuditBornRuleRationalNormalization = auditBornRuleRationalNormalization
 
+0 prfAuditSymplecticFreeParticle : Reflect.ActionAuditor.auditSymplecticFreeParticleProofExport = True
+prfAuditSymplecticFreeParticle = auditSymplecticFreeParticle
+
 main : IO ()
 main = do
   putStrLn "========================================================"
@@ -51,6 +54,7 @@ main = do
   putStrLn "   - Streaming Crooks Fluctuation: INJECTED & VALID (Refl) ✅"
   putStrLn "   - Spinor Probability Density Positivity: INJECTED & VALID (Refl) ✅"
   putStrLn "   - Born Rule Rational Normalization: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Discrete Symplectic Leapfrog Linear State Transduction: INJECTED & VALID (Refl) ✅"
 
   putStrLn ""
   putStrLn "1. Discrete Action & Euler-Lagrange Geodesic Proof Audits:"
