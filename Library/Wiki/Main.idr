@@ -95,6 +95,13 @@ main = do
      else do
        putStrLn "   [FAILED] Deforested Density & Spinor Stream Specs Failed!"
        exitWith (ExitFailure 1)
+  putStrLn ""
+  putStrLn "6. Deforested Streaming Partition Functions & Cosmic Sector Scaled Sums:"
+  if auditStreamPartitionEquivalenceProof
+     then putStrLn "   [PASSED] Deforested StreamPolynumber Partition Function Evaluation Verified!"
+     else do
+       putStrLn "   [FAILED] Streaming Partition Function Specs Failed!"
+       exitWith (ExitFailure 1)
   putStrLn "========================================================"
   putStrLn "  PHYSICS WIKI VERIFICATION COMPLETE: ALL PASSED!"
   putStrLn "========================================================"
