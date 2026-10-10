@@ -50,24 +50,6 @@ public export
 dynamicTriad : BoxInt -> BoxInt -> TriadQuadrance
 dynamicTriad x y = pythagoreanFixedPoint x y
 
-||| Scaled companion spread Maxel for exact integer coordinates (x, y),
-||| where Q_Blue = x^2 + y^2, Q_Red = x^2 - y^2:
-||| entry [1, 1] is exactly 2 * Q_Red (the unnormalized 2 - 4s scaled by Q_Blue).
-public export
-pythagoreanSpreadMaxel : (x : BoxInt) -> (y : BoxInt) -> Maxel
-pythagoreanSpreadMaxel x y =
-  let qBlue = (x * x) + (y * y)
-      qRed  = (x * x) - (y * y)
-      c11   = intToBoxInt 2 * qRed
-      c12   = mulBox (intToBoxInt (-1)) qBlue
-      c21   = qBlue
-      c22   = intToBoxInt 0
-  in MkMaxel [ (MkPixel 1 1, c11)
-             , (MkPixel 1 2, c12)
-             , (MkPixel 2 1, c21)
-             , (MkPixel 2 2, c22)
-             ]
-
 ------------------------------------------------------------------------
 -- QUICKCHECK PROPERTY SUITES
 ------------------------------------------------------------------------
