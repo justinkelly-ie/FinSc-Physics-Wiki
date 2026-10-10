@@ -7,6 +7,7 @@ import Wiki.PhysicsScaleTransformSpec
 import Wiki.LawHomomorphismSpec
 import Wiki.QuadStreamPhysicalLawsSpec
 import Wiki.DensityStreamSpec
+import Wiki.DynamicPythagoreanSpreadSpec
 import Reflect.ActionAuditor
 import Language.Reflection
 
@@ -101,6 +102,14 @@ main = do
      then putStrLn "   [PASSED] Deforested StreamPolynumber Partition Function Evaluation Verified!"
      else do
        putStrLn "   [FAILED] Streaming Partition Function Specs Failed!"
+       exitWith (ExitFailure 1)
+  putStrLn ""
+  putStrLn "7. Dynamic Pythagorean Triads, Spread Maxels & Non-Destructive Pixel Basis Specs:"
+  p5 <- auditDynamicPythagoreanSpreadSpecProof
+  if p5
+     then putStrLn "   [PASSED] Dynamic Pythagorean Triads & Spread Maxel Basis Verified!"
+     else do
+       putStrLn "   [FAILED] Dynamic Pythagorean Spread Specs Failed!"
        exitWith (ExitFailure 1)
   putStrLn "========================================================"
   putStrLn "  PHYSICS WIKI VERIFICATION COMPLETE: ALL PASSED!"

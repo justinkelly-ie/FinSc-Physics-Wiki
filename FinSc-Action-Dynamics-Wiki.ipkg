@@ -8,6 +8,7 @@ sourcedir = "Library"
 
 modules = Wiki.Generators,
           Wiki.DensityStreamSpec,
+          Wiki.DynamicPythagoreanSpreadSpec,
           Wiki.LawHomomorphismSpec,
           Wiki.Main,
           Wiki.PhysicsScaleTransformSpec,
