@@ -32,7 +32,7 @@ import Stage1.Math.TopologicalChernNumber
 import Wiki.Generators
 import Data.Vect
 
-%default covering
+%default total
 
 ||| Property 1: Deforested Density Matrix Norm Stream Equivalence
 public export
@@ -66,7 +66,7 @@ prop_chernNumberStreamExtractionGen valRaw =
   in c1Stream == valRaw
 
 ||| Main Verification Suite for Deforested Density & Spinor Metric Streams
-public export covering
+public export
 auditDensityStreamSpecProof : IO Bool
 auditDensityStreamSpecProof = do
   let r1 = qc prop_densityNormStreamEquivalenceGen

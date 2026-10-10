@@ -143,7 +143,7 @@ prop_compositeQuadLawPipelineMassTrackingGen degRaw valRaw =
   in quadStreamPhysicalMass qsComposed == quadStreamPhysicalMass qsDirect
 
 ||| Main Verification Suite for Quad-Stream Physical Law Integration
-public export covering
+public export
 auditQuadStreamPhysicalLawsProof : IO Bool
 auditQuadStreamPhysicalLawsProof = do
   let r1 = qc2 prop_physicalQuadStreamFilterPreservationGen

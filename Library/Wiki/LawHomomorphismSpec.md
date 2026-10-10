@@ -61,17 +61,11 @@ record VerifiedPhysicalTrajectory where
   actionAfter  : Nat
   0 stationaryActionPrf : StationaryActionWitness actionBefore actionAfter
 
-||| $O(1)$ allocation deforested variational trajectory stream transducer using fusedHylomorphism
-public export covering
+||| $O(1)$ allocation deforested variational trajectory stream transducer using foldStreamNat
+public export
 fusedVariationalTrajectoryStream : Fuel -> List (Nat, Nat) -> Nat
 fusedVariationalTrajectoryStream f items =
-  fusedHylomorphism f
-    (\st => case st of
-              [] => Done
-              (s1, s2) :: rest => Yield (s1 + s2) rest)
-    (\val, acc => val + acc)
-    0
-    items
+  foldStreamNat (length items) (\acc, (s1, s2) => acc + s1 + s2) 0 (stream items)
 
 public export
 0 staticProofApplicativeHomomorphismMaybeMultiset : (n : BoxInt) -> n = n

@@ -10,7 +10,7 @@ import Wiki.DensityStreamSpec
 import Reflect.ActionAuditor
 import Language.Reflection
 
-%default covering
+%default total
 
 ||| Compile-time macro invariant witnesses (Rule 01)
 0 prfAuditGeodesicLeastAction : Reflect.ActionAuditor.auditGeodesicLeastActionProof = True
@@ -22,6 +22,21 @@ prfAuditNoetherConservation = auditNoetherConservation
 0 prfAuditCausalActionAsymmetry : Reflect.ActionAuditor.auditCausalActionAsymmetryProof = True
 prfAuditCausalActionAsymmetry = auditCausalActionAsymmetry
 
+0 prfAuditPipelineQuadStreamLedger : Reflect.ActionAuditor.auditPipelineQuadStreamLedgerProofExport = True
+prfAuditPipelineQuadStreamLedger = auditPipelineQuadStreamLedger
+
+0 prfAuditComposableLawAssociativity : Reflect.ActionAuditor.auditComposableLawAssociativityProofExport = True
+prfAuditComposableLawAssociativity = auditComposableLawAssociativity
+
+0 prfAuditStreamingCrooks : Reflect.ActionAuditor.auditStreamingCrooksProofExport = True
+prfAuditStreamingCrooks = auditStreamingCrooks
+
+0 prfAuditSpinorDensityPositivity : Reflect.ActionAuditor.auditSpinorDensityPositivityProofExport = True
+prfAuditSpinorDensityPositivity = auditSpinorDensityPositivity
+
+0 prfAuditBornRuleRationalNormalization : Reflect.ActionAuditor.auditBornRuleRationalNormalizationProofExport = True
+prfAuditBornRuleRationalNormalization = auditBornRuleRationalNormalization
+
 main : IO ()
 main = do
   putStrLn "========================================================"
@@ -31,6 +46,12 @@ main = do
   putStrLn "   - Geodesic Least Action Optimality: INJECTED & VALID (Refl) ✅"
   putStrLn "   - Noether Momentum Conservation: INJECTED & VALID (Refl) ✅"
   putStrLn "   - Causal Action Arrow Asymmetry: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Quad-Stream Multi-Law Ledger: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Composable Law Transducer Associativity: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Streaming Crooks Fluctuation: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Spinor Probability Density Positivity: INJECTED & VALID (Refl) ✅"
+  putStrLn "   - Born Rule Rational Normalization: INJECTED & VALID (Refl) ✅"
+
   putStrLn ""
   putStrLn "1. Discrete Action & Euler-Lagrange Geodesic Proof Audits:"
   if prop_eulerLagrangeGeodesicValid && prop_leastActionGeodesicValid

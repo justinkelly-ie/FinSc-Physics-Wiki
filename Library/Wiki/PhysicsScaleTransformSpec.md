@@ -44,17 +44,11 @@ record VerifiedParticleState where
   energyAfter  : Nat
   0 conservationPrf : TrajectoryEnergyConservationWitness energyBefore energyAfter
 
-||| $O(1)$ allocation deforested particle trajectory stream transducer using fusedHylomorphism
-public export covering
+||| $O(1)$ allocation deforested particle trajectory stream transducer using foldStreamNat
+public export
 fusedParticleTrajectoryStream : Fuel -> List (Nat, Nat) -> Nat
 fusedParticleTrajectoryStream f items =
-  fusedHylomorphism f
-    (\st => case st of
-              [] => Done
-              (e1, e2) :: rest => Yield (e1 + e2) rest)
-    (\val, acc => val + acc)
-    0
-    items
+  foldStreamNat (length items) (\acc, (e1, e2) => acc + e1 + e2) 0 (stream items)
 
 ||| 1. Non-Negative Metric Quadrance: Q(x, y) >= 0
 public export
