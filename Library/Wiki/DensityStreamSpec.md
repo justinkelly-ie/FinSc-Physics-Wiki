@@ -63,7 +63,7 @@ prop_chernNumberStreamExtractionGen valRaw =
       e = AddM (intToBoxInt 0) val ZeroM
       qs = MkQuadStream e ZeroM ZeroM ZeroM
       c1Stream = evaluateQuadStreamChernNumber qs
-  in c1Stream == valRaw
+  in c1Stream == val
 
 ||| Main Verification Suite for Deforested Density & Spinor Metric Streams
 public export
