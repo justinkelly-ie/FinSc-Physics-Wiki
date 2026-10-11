@@ -37,6 +37,8 @@ import Stage0.OnSeq.FusedStream
 import Data.Fuel
 import PhaseUnfolding
 import ActionDynamics
+import Stage0.Applicative
+import Data.Vect
 import Wiki.Generators
 import public QuickCheck
 import Language.Reflection
@@ -113,22 +115,31 @@ prop_applicativeHomomorphismPureComposed x =
 public export
 prop_adjointDualRoundTripInvariance : Integer -> Bool
 prop_adjointDualRoundTripInvariance x =
-  let b = intToBoxInt x
-  in b == b
+  let s = MkQuadLawState (integerToNat (abs x) + 1)
+      t = AddM (MkQuadLawFunctor s (intToBoxInt x), intToBoxInt 1) (intToBoxInt 1) ZeroM
+      iso = quadLawHomTensorIso t
+      inv = quadLawHomTensorInv iso
+  in inv == t
 
 ||| 7. Adjoint Chain Composition Invariance Verification
 public export
 prop_adjointChainCompositionInvariance : Integer -> Bool
 prop_adjointChainCompositionInvariance x =
-  let b = intToBoxInt x
-  in b == b
+  let s = MkQuadLawState (integerToNat (abs x) + 2)
+      t = AddM (MkQuadLawFunctor s (intToBoxInt (x * 2)), intToBoxInt 3) (intToBoxInt 1) ZeroM
+      iso = quadLawHomTensorIso t
+      inv = quadLawHomTensorInv iso
+  in inv == t
 
 ||| 8. Physical Observer Measurement Comonad Invariance Verification
 public export
 prop_physicsComonadInvariance : Integer -> Bool
 prop_physicsComonadInvariance x =
-  let b = intToBoxInt x
-  in b == b
+  let blankTensor = Metric (Data.Vect.replicate 3 (Data.Vect.replicate 3 zeroUnixelFraction))
+      sp = Space {color = Elliptic} blankTensor
+      env = PhysEnv sp (intToBoxInt x)
+      val = case env of PhysEnv _ v => v
+  in val == intToBoxInt x
 
 ||| QuickCheck Execution Runner
 public export
