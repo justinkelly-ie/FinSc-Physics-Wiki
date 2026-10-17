@@ -34,6 +34,7 @@ module Wiki.LawHomomorphismSpec
 import Core
 import Stage1.Order.Preorder
 import Stage0.OnSeq.FusedStream
+import Stage0.StructuralFuel
 import Data.Fuel
 import PhaseUnfolding
 import ActionDynamics
@@ -63,11 +64,11 @@ record VerifiedPhysicalTrajectory where
   actionAfter  : Nat
   0 stationaryActionPrf : StationaryActionWitness actionBefore actionAfter
 
-||| $O(1)$ allocation deforested variational trajectory stream transducer using foldStreamNat
+||| $O(1)$ allocation deforested variational trajectory stream transducer using foldStreamNat and model-indexed GohFuel
 public export
-fusedVariationalTrajectoryStream : Fuel -> List (Nat, Nat) -> Nat
-fusedVariationalTrajectoryStream f items =
-  foldStreamNat (length items) (\acc, (s1, s2) => acc + s1 + s2) 0 (stream items)
+fusedVariationalTrajectoryStream : GohFuel cap -> List (Nat, Nat) -> Nat
+fusedVariationalTrajectoryStream fuel items =
+  foldStreamNat (gohSteps fuel) (\acc, (s1, s2) => acc + s1 + s2) 0 (stream items)
 
 public export
 0 staticProofApplicativeHomomorphismMaybeMultiset : (n : BoxInt) -> n = n
@@ -153,6 +154,6 @@ auditLawHomomorphismSpecProof = do
   let r6 = qc prop_adjointDualRoundTripInvariance
   let r7 = qc prop_adjointChainCompositionInvariance
   let r8 = qc prop_physicsComonadInvariance
-  let streamSum = fusedVariationalTrajectoryStream (limit 100) [(5, 10), (10, 20)]
+  let streamSum = fusedVariationalTrajectoryStream ellipticGohFuelModel [(5, 10), (10, 20)]
   pure (r1.pass == Just True && r2.pass == Just True && r3.pass == Just True && r4.pass == Just True && r5.pass == Just True && r6.pass == Just True && r7.pass == Just True && r8.pass == Just True && streamSum == 45)
 ```

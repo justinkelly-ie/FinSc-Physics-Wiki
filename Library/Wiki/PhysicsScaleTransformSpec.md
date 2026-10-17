@@ -18,6 +18,7 @@ import Core
 import PhaseUnfolding
 import ActionDynamics
 import Stage0.OnSeq.FusedStream
+import Stage0.StructuralFuel
 import Stage1.ScaleTransform
 import Stage1.Math.PhysicsScaleTransforms
 import Data.Fuel
@@ -44,11 +45,11 @@ record VerifiedParticleState where
   energyAfter  : Nat
   0 conservationPrf : TrajectoryEnergyConservationWitness energyBefore energyAfter
 
-||| $O(1)$ allocation deforested particle trajectory stream transducer using foldStreamNat
+||| $O(1)$ allocation deforested particle trajectory stream transducer using foldStreamNat and model-indexed GohFuel
 public export
-fusedParticleTrajectoryStream : Fuel -> List (Nat, Nat) -> Nat
-fusedParticleTrajectoryStream f items =
-  foldStreamNat (length items) (\acc, (e1, e2) => acc + e1 + e2) 0 (stream items)
+fusedParticleTrajectoryStream : GohFuel cap -> List (Nat, Nat) -> Nat
+fusedParticleTrajectoryStream fuel items =
+  foldStreamNat (gohSteps fuel) (\acc, (e1, e2) => acc + e1 + e2) 0 (stream items)
 
 ||| 1. Non-Negative Metric Quadrance: Q(x, y) >= 0
 public export
@@ -81,6 +82,6 @@ auditPhysicsScaleTransformSpecProof : IO Bool
 auditPhysicsScaleTransformSpecProof = do
   let r1 = qc prop_coordQuadranceNonNegative
   let r2 = qc prop_coordQuadranceMatchesFormula
-  let streamSum = fusedParticleTrajectoryStream (limit 100) [(50, 50), (10, 10)]
+  let streamSum = fusedParticleTrajectoryStream ellipticGohFuelModel [(50, 50), (10, 10)]
   pure (r1.pass == Just True && r2.pass == Just True && streamSum == 120)
 ```
