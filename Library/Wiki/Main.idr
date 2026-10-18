@@ -119,6 +119,13 @@ main = do
      else do
        putStrLn "   [FAILED] Dynamic Pythagorean Spread Specs Failed!"
        exitWith (ExitFailure 1)
+  putStrLn ""
+  putStrLn "8. 2LTT Staged Symplectic Evolution & Stationary Action MultisetPathIso Specs:"
+  if auditStagedSymplecticEvolution && auditStationaryActionPath
+     then putStrLn "   [PASSED] 2LTT Staged Symplectic Evolution (O(log N) Squaring) & Stationary Action MultisetPathIso Verified!"
+     else do
+       putStrLn "   [FAILED] Staged Symplectic Evolution / MultisetPathIso Specs Failed!"
+       exitWith (ExitFailure 1)
   putStrLn "========================================================"
   putStrLn "  PHYSICS WIKI VERIFICATION COMPLETE: ALL PASSED!"
   putStrLn "========================================================"
