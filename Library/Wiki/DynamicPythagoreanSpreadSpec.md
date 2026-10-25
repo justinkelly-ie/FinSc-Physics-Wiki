@@ -19,7 +19,9 @@ module Wiki.DynamicPythagoreanSpreadSpec
 
 import Stage0.BoxInt
 import Stage0.Multiset
-import Stage1.VexelMaxel
+import Stage1.Carrier.Maxel
+import Stage1.Carrier.Vexel
+import Stage1.Basis.Coordinate
 import Stage1.RationalTrig
 import Stage1.Multiset.PrimordialUnfolding
 import Wiki.Generators
