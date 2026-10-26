@@ -19,8 +19,6 @@ module Wiki.DynamicPythagoreanSpreadSpec
 
 import Stage0.BoxInt
 import Stage0.Multiset
-import Stage1.Carrier.Maxel
-import Stage1.Carrier.Vexel
 import Stage1.Basis.Coordinate
 import Stage1.RationalTrig
 import Stage1.Multiset.PrimordialUnfolding
@@ -107,11 +105,11 @@ prop_diagonalMaxelPreservesVexelSupportGen (w1Raw, w2Raw) (v1Raw, v2Raw) =
       w2 = intToBoxInt (if w2Raw == 0 then 1 else w2Raw)
       v1 = intToBoxInt (if v1Raw == 0 then 1 else v1Raw)
       v2 = intToBoxInt (if v2Raw == 0 then 1 else v2Raw)
-      mDiag = MkMaxel [ (MkPixel 1 1, w1), (MkPixel 2 2, w2) ]
-      vIn = MkVexel [ (MkUnixel 1, v1), (MkUnixel 2, v2) ]
-      vOut = canonicalizeVexel (actMaxelVexel mDiag vIn)
-      out1 = lookupUnixel (MkUnixel 1) vOut
-      out2 = lookupUnixel (MkUnixel 2) vOut
+      mDiag = singletonCell (MkPixel 1 1) w1 <+> singletonCell (MkPixel 2 2) w2
+      vIn = singletonCell (MkUnixel 1) v1 <+> singletonCell (MkUnixel 2) v2
+      vOut = canonicalizeCell (actMaxelVexel mDiag vIn)
+      out1 = lookupCellMultiset (MkUnixel 1) vOut
+      out2 = lookupCellMultiset (MkUnixel 2) vOut
   in boxEq out1 (w1 * v1) && boxEq out2 (w2 * v2)
 
 ||| Property 5 (Generative QuickCheck): Off-Diagonal Maxels Induce Pure Coordinate Transitions
@@ -121,10 +119,10 @@ public export
 prop_offDiagonalMaxelTransitionsOrDestroysGen : Integer -> Bool
 prop_offDiagonalMaxelTransitionsOrDestroysGen vRaw =
   let vWeight = intToBoxInt (if vRaw == 0 then 1 else vRaw)
-      vState1 = MkVexel [ (MkUnixel 1, vWeight) ]
-      vOut = canonicalizeVexel (actMaxelVexel greenMetricMaxel2D vState1)
-      out1 = lookupUnixel (MkUnixel 1) vOut
-      out2 = lookupUnixel (MkUnixel 2) vOut
+      vState1 = singletonCell (MkUnixel 1) vWeight
+      vOut = canonicalizeCell (actMaxelVexel greenMetricMaxel2D vState1)
+      out1 = lookupCellMultiset (MkUnixel 1) vOut
+      out2 = lookupCellMultiset (MkUnixel 2) vOut
   in boxEq out1 (intToBoxInt 0) && boxEq out2 vWeight
 
 ||| Property 6 (Generative QuickCheck): Dynamic Pythagorean Spread Maxel Recurrence Action
@@ -139,10 +137,10 @@ prop_pythagoreanSpreadMaxelActionGen (xRaw, yRaw) vRaw =
       qBlue = (x * x) + (y * y)
       qRed  = (x * x) - (y * y)
       mSpread = pythagoreanSpreadMaxel x y
-      vIn = MkVexel [ (MkUnixel 1, v1) ]
-      vOut = canonicalizeVexel (actMaxelVexel mSpread vIn)
-      persistedWeight = lookupUnixel (MkUnixel 1) vOut
-      transitionWeight = lookupUnixel (MkUnixel 2) vOut
+      vIn = singletonCell (MkUnixel 1) v1
+      vOut = canonicalizeCell (actMaxelVexel mSpread vIn)
+      persistedWeight = lookupCellMultiset (MkUnixel 1) vOut
+      transitionWeight = lookupCellMultiset (MkUnixel 2) vOut
       expectedPersisted = (intToBoxInt 2 * qRed) * v1
       expectedTransition = qBlue * v1
   in boxEq persistedWeight expectedPersisted && boxEq transitionWeight expectedTransition
